@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <title>Education</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #000000, #1c1c1c);
+            color: #ffffff;
+            overflow-y: scroll; /* Added for normal scroll */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #111;
+            padding: 1rem 1rem;
+            position: fixed;
+            width: 99%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #ffd166;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: #ff6f61;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 1.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff6f61;
+        }
+
+        .home {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            min-height: 100vh; /* Added to ensure content fills the viewport */
+        }
+
+        .home-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 30px rgba(255, 111, 97, 0.1);
+            max-width: 800px;
+            margin: auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .home-content h1 {
+            font-size: 3rem;
+            color: #ffd166;
+        }
+
+        .edu-box {
+            margin-top: 2rem;
+            text-align: left;
+            font-size: 1.3rem;
+            line-height: 2;
+        }
+
+        .edu-box b {
+            color: #ff6f61;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .home-content {
+                padding: 2rem;
+            }
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+            nav a {
+                font-size: 1rem;
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">Bharatraj</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="skills.html">Skills</a>
+            <a href="education.html" class="active">Education</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    
+    <section class="home">
+        <div class="home-content">
+            <h1>Education</h1>
+            <div class="edu-box">
+                <p><b>B.Tech in CSE  (Artificial Intelligence and Data Analytics)</b><br> 
+                Sri Ramachandra Institute of Higher Education and Research, Porur<br> 
+                2023 – 2027</p>
+
+                <p><b>Higher Secondary (12th Grade)</b><br>
+                Velammal Matriculation Higher Secondary School, Chennai<br>
+                2022 – 2023<br>
+                Scored 61% – Focused on Mathematics, Physics, Chemistry, and Computer Science</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

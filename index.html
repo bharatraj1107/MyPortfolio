@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Home</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #000000, #1c1c1c);
+            color: #ffffff;
+        }
+
+        /* ===== HEADER (Matches Projects Page) ===== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #111;
+            padding: 1rem 1rem;
+            position: fixed;
+            width: 99%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .logo {
+            font-size: 2.5rem;
+            color: #ff6f61;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        a:hover {
+      text-decoration: underline;
+      color: #ffd166;
+    }   
+        .hamburger {
+      display: none;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+    }
+        nav a {
+            color: white;
+            margin: 0 1.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff6f61;
+        }
+
+        /* ===== HOME SECTION ===== */
+        .home {
+            display: flex;
+            justify-content: center;   
+            align-items: top;
+            min-height: 100vh;
+            padding: 8rem 2rem;
+            gap: 4rem;
+        }
+
+        .home-img img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ff6f61;
+            box-shadow: 0 0 30px rgba(255, 111, 97, 0.3);
+        }
+
+        .home-content {
+            max-width: 600px;
+        }
+
+        .home-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .home-content h1 span {
+            color: #ff6f61;
+        }
+
+        .home-content h3 {
+            font-size: 2rem;
+            color: #ffd166;
+            margin-bottom: 1.5rem;
+        }
+
+        .home-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons {
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: #ff6f61;
+            transform: translateY(-5px);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #ff6f61;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #ff4d3a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 111, 97, 0.3);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .home {
+                flex-direction: column;
+                padding: 6rem 2rem;
+                text-align: center;
+            }
+            
+            .home-img img {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .home-content h3 {
+                font-size: 1.5rem;
+            }
+            
+            nav a {
+                font-size: 1rem;
+                margin: 0 1rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">Bharatraj</a>
+        <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <nav>
+            
+            <a href="index.html" class="active">Home</a>
+            <a href="skills.html">Skills</a>
+            <a href="education.html">Education</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="home">
+        <div class="home-img"><img src="main.jpg" alt="Profile Image"></div>
+        <div class="home-content">
+            <h1>Hi, It's <span>Bharatraj</span></h1>
+            <h3 class="typing-text">I'm a <span id="typing"></span></h3>
+            <p>An enthusiastic learner in Data Science and Artificial Intelligence with a strong interest in using machine learning and analytics to solve real-world problems. Quick to adapt to new technologies and eager to contribute to innovative software solutions.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="contact.html" class="btn">Hire me</a>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

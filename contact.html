@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <title>Contact</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #000000, #1c1c1c);
+      color: #ffffff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111;
+      padding: 1rem 1rem;
+      position: fixed;
+      width: 99%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      color: #ff6f61;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff6f61;
+    }
+
+    .home {
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    .home-content {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 3rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(255, 111, 97, 0.1);
+      max-width: 700px;
+      margin: auto;
+      animation: fadeInUp 1s ease;
+    }
+
+    .home-content h1 {
+      font-size: 3rem;
+      color: #ffd166;
+      margin-bottom: 2rem;
+    }
+
+    .home-content p {
+      font-size: 1.3rem;
+      margin: 1rem 0;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #5edfff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #ffd166;
+    }
+
+    i.fa {
+      margin-right: 8px;
+      color: #ff6f61;
+    }
+
+   
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    @media(max-width: 768px) {
+      .home-content {
+        padding: 2rem;
+      }
+      .home-content h1 {
+        font-size: 2.5rem;
+      }
+      nav a {
+        font-size: 1rem;
+        margin: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">Bharatraj</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="skills.html">Skills</a>
+      <a href="education.html">Education</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+  <section class="home">
+    <div class="home-content">
+      <h1>Contact Me</h1>
+      <p><i class="fa fa-phone"></i><b>Phone:</b> +91 9025649117</p>
+      <p><i class="fa fa-envelope"></i><b>Email:</b> <a href="mailto:Bharatrajbaskar07@gmail.com">Bharatrajbaskar07@gmail.com</a></p>
+      <p><i class="fab fa-linkedin"></i><b>LinkedIn:</b> <a href="https://linkedin.com/in/bharatraj-b-93a531325" target="_blank">linkedin.com/in/bharatraj-b-93a531325</a></p>
+      <p><i class="fab fa-github"></i><b>GitHub:</b> <a href="https://github.com/bharatraj1107" target="_blank">github.com/bharatraj1107</a></p>
+    </div>
+  </section>
+
+</body>
+</html>
