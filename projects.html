@@ -4,157 +4,507 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-  <title>Skills</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Projects - My Portfolio</title> <!-- Corrected Title -->
   <style>
-     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #000000, #1c1c1c);
-      color: #ffffff;
+    /* --- General Styles --- */
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to right, #000000, #1c1c1c);
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        /* Optional: Prevent default browser swipe navigation if it interferes. */
+        /* overscroll-behavior-x: none; */
     }
 
+    /* --- Header (Enhanced) --- */
     header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #111;
-            padding: 1rem 1rem;
-            position: fixed;
-            width: 99%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .logo {
-            font-size: 2.5rem;
-            color: #ff6f61;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .hamburger {
-      display: none;
-      font-size: 2rem;
-      color: #fff;
-      cursor: pointer;
-    }
-        
-    nav a {
-      color: white;
-      margin: 0 1.5rem;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1.2rem; /* Correct nav link size */
-      transition: color 0.3s;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(17, 17, 17, 0.9);
+        padding: 1rem 2rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        box-sizing: border-box;
+        backdrop-filter: blur(10px);
+        transition: padding 0.3s ease, background-color 0.3s ease;
     }
 
-    nav a:hover {
-      color: #ff6f61;
+    header.scrolled {
+        padding: 0.7rem 2rem;
+        background: rgba(0, 0, 0, 0.95);
     }
 
-    .home {
+    .logo {
+        font-size: 2.5rem;
+        color: #ff6f61;
+        font-weight: bold;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: transform 0.3s ease, text-shadow 0.3s ease;
+    }
+    .logo:hover {
+        transform: scale(1.05);
+        text-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
+    }
+
+    /* --- Desktop Navigation (Enhanced) --- */
+    nav#navMenu {
+        display: flex;
+        align-items: center;
+    }
+
+    nav#navMenu a {
+        color: white;
+        margin: 0 1.5rem;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        position: relative;
+        padding: 0.5rem 0.2rem;
+    }
+
+    nav#navMenu a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #ff6f61;
+        transition: width 0.3s ease;
+    }
+
+    nav#navMenu a:hover::after {
+        width: 100%;
+    }
+
+    nav#navMenu a:hover {
+        color: #ff6f61;
+        transform: translateY(-3px);
+        background-color: rgba(255, 111, 97, 0.05);
+        border-radius: 4px;
+    }
+
+    nav#navMenu a.active {
+        color: #ff6f61;
+        background-color: rgba(255, 111, 97, 0.08);
+        border-radius: 4px;
+    }
+    nav#navMenu a.active::after {
+        width: 100%;
+    }
+
+    /* --- Hamburger Menu (Enhanced) --- */
+    .hamburger {
+        display: none;
+        font-size: 2rem;
+        color: #fff;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        line-height: 1;
+        z-index: 1001;
+        transition: color 0.3s ease;
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+    }
+    .hamburger:hover {
+        color: #ff6f61;
+    }
+
+    .hamburger i {
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .hamburger .fa-times {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-90deg) scale(0.7);
+    }
+    .hamburger.active .fa-bars {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(90deg) scale(0.7);
+    }
+    .hamburger.active .fa-times {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+
+    /* --- Main Content Section (Using .projects-section for clarity) --- */
+    .projects-section {
       padding: 8rem 2rem 4rem;
       text-align: center;
+      flex-grow: 1;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
 
-    .home-content {
+    .projects-content-box { /* Renamed from .home-content for clarity */
       background: rgba(255, 255, 255, 0.05);
-      padding: 3rem;
+      padding: 2.5rem;
       border-radius: 1rem;
       box-shadow: 0 0 30px rgba(255, 111, 97, 0.1);
       max-width: 800px;
-      margin: auto;
+      width: 90%;
+      margin: 0 auto;
       animation: fadeInUp 1s ease;
+      text-align: left;
     }
 
-    .home-content h1 {
-      font-size: 3.5rem;
-      color: #ff6f61;
-      margin-bottom: 1rem;
+    .projects-content-box h1.page-title { /* Added a class for the main page title */
+      font-size: 3rem;
+      color: #ff6f61; /* Theme color for main title */
+      margin-bottom: 2rem; /* Increased margin */
+      text-align: center;
     }
 
-    .home-content h2 {
-      font-size: 2rem;
+    .projects-content-box .project-item h2 { /* For project titles */
+      font-size: 1.8rem;
       color: #ffd166;
       margin-top: 2rem;
       margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 210, 102, 0.5);
+      padding-bottom: 0.5rem;
+    }
+    .projects-content-box .project-item:first-of-type h2 { /* Remove top margin from the first project's H2 */
+        margin-top: 0;
     }
 
-    .home-content ul {
-      list-style: none;
-      font-size: 1.4rem;
+    .projects-content-box .project-item ul {
+      list-style: disc;
+      font-size: 1.1rem;
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .projects-content-box .project-item li {
+      margin: 0.8rem 0;
+      background: none;
       padding: 0;
-    }
-
-    .home-content li {
-      margin: 1rem 0;
-      background: rgba(255, 255, 255, 0.08);
-      padding: 1rem;
-      border-radius: 0.5rem;
-    }
-
-    .home-content p {
-      font-size: 1.3rem;
+      border-radius: 0;
       line-height: 1.6;
-      color: #ddd;
     }
 
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @media(max-width: 768px) {
-      .home-content {
-        padding: 2rem;
-      }
-      .home-content h1 {
-        font-size: 2.5rem;
-      }
-      nav a {
-        font-size: 1rem;
-        margin: 0 1rem;
-      }
+    /* --- Media Queries --- */
+    @media (max-width: 991.98px) {
+        header { padding: 1rem 1.5rem; }
+        .logo { font-size: 2.2rem; }
+        nav#navMenu a { margin: 0 1rem; font-size: 1.1rem; }
+
+        .projects-section { padding: 7rem 1.5rem 3rem; }
+        .projects-content-box { padding: 2rem; max-width: 90%; }
+        .projects-content-box h1.page-title { font-size: 2.6rem; }
+        .projects-content-box .project-item h2 { font-size: 1.6rem; }
+        .projects-content-box .project-item ul { font-size: 1rem; }
+    }
+
+    @media (max-width: 767.98px) {
+        header { padding: 0.8rem 1rem; }
+        .logo { font-size: 1.8rem; }
+
+        .hamburger { display: block; padding: 0; }
+
+        nav#navMenu:not(.active) {
+            display: none;
+        }
+
+        nav#navMenu.active, nav#navMenu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: fixed;
+            top: 56px;
+            left: 0;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.98);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            padding: 1rem 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            transform: translateY(-150%);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease-out, visibility 0s 0.4s;
+        }
+
+        nav#navMenu.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease-in, visibility 0s 0s;
+        }
+
+        nav#navMenu a {
+            display: block; margin: 0.5rem 0; padding: 1rem 0; width: 80%;
+            text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.2rem; color: white; background-color: transparent; border-radius: 0;
+            opacity: 0; transform: translateX(-20px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out, color 0.3s ease;
+        }
+        nav#navMenu a:last-child { border-bottom: none; }
+        nav#navMenu a:hover, nav#navMenu a.active {
+            background-color: rgba(255, 111, 97, 0.1); color: #ff6f61; transform: translateX(0);
+        }
+        nav#navMenu a::after { display: none; }
+        nav#navMenu.active a { opacity: 1; transform: translateX(0); }
+        nav#navMenu.active a:nth-child(1) { transition-delay: 0.1s; }
+        /* ... other nth-child delays ... */
+        nav#navMenu.active a:nth-child(5) { transition-delay: 0.3s; }
+
+        .projects-section { padding: 6rem 1rem 2rem; }
+        .projects-content-box { padding: 1.5rem; width: 95%; }
+        .projects-content-box h1.page-title { font-size: 2.2rem; }
+        .projects-content-box .project-item h2 { font-size: 1.5rem; }
+        .projects-content-box .project-item ul { font-size: 0.95rem; padding-left: 1.2rem;}
+    }
+
+    @media (max-width: 575.98px) {
+        .logo { font-size: 1.6rem; }
+        header { padding: 0.6rem 0.8rem; }
+        nav#navMenu.active, nav#navMenu { top: 48px; }
+        .projects-section { padding: 5rem 0.5rem 2rem; }
+        .projects-content-box { padding: 1.2rem; }
+        .projects-content-box h1.page-title { font-size: 2rem; }
+        .projects-content-box .project-item h2 { font-size: 1.3rem; }
+        .projects-content-box .project-item ul { font-size: 0.9rem; padding-left: 1rem;}
     }
   </style>
 </head>
 <body>
-  <header>
+  <header id="mainHeader">
     <a href="index.html" class="logo">My Portfolio</a>
-    <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-    <nav>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-times"></i>
+    </button>
+    <nav id="navMenu">
       <a href="index.html">Home</a>
-      <a href="skills.html" class="active">Skills</a>
+      <a href="skills.html">Skills</a>
       <a href="education.html">Education</a>
-      <a href="projects.html">Projects</a>
+      <a href="projects.html" class="active">Projects</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <section class="home">
-    <div class="home-content">
-      <h1>Technical Skills</h1>
-      <ul>
-        <li><b>Backend:</b> Python, C, C++, Java</li>
-        <li><b>Frontend:</b> HTML, CSS, JavaScript</li>
-        <li><b>Database:</b> MySQL, MongoDB</li>
-        <li><b>Tools:</b> MS Excel, MS Word</li>
-      </ul>
+  <section class="projects-section"> <!-- Changed class name -->
+    <div class="projects-content-box"> <!-- Changed class name -->
+      <h1 class="page-title">My Projects</h1> <!-- Added a main title -->
+      <div class="project-item"> <!-- Wrapped each project -->
+        <h2>VIRTUAL MOUSE POINTER USING PYTHON</h2>
+        <ul>
+          <li>Developed a virtual mouse system employing real-time hand gestures for controlling cursor movement and clicking.</li>
+          <li>Used OpenCV and MediaPipe for hand tracking, capturing live video feed from the webcam to identify hand landmarks.</li>
+          <li>Implemented gesture recognition logic to control the cursor using the index finger and simulate mouse clicks based on thumb-index finger proximity.</li>
+          <li>Integrated PyAutoGUI to control the system's GUI, providing a touchless and intuitive user interface.</li>
+        </ul>
+      </div>
 
-      <h2>Non-Technical Skills</h2>
-      <p>Team Work, Creativity, Time Management, Communication, Adaptability, Problem-Solving, Leadership Potential, Critical Thinking, Attention to Detail</p>
-
-      <h2>Languages Known</h2>
-      <p>Tamil, English, Hindi</p>
+      <div class="project-item"> <!-- Wrapped each project -->
+        <h2>TRAFFIC FLOW PREDICTION USING AI</h2>
+        <ul>
+          <li>Developed a machine learning model to forecast traffic flow based on past vehicle count data.</li>
+          <li>Preprocessed timestamped data to extract features like hour, day, month, and weekday to enhance model accuracy.</li>
+          <li>Compared and trained three regression models (Random Forest, Decision Tree, and Linear Regression) to assess performance based on MAE and R² Score.</li>
+          <li>Built visual comparisons of model predictions to determine the most effective regression model for forecasting.</li>
+          <li>Visualized and interpreted forecasts to determine the best fit model, supporting intelligent city planning and traffic management programs</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <script src="script.js"></script>
+  <script>
+    // --- Mobile Menu Toggle & Close Logic ---
+    function toggleMenu() {
+        const navMenu = document.getElementById('navMenu');
+        const hamburger = document.querySelector('.hamburger');
+        if (!navMenu || !hamburger) return;
+        const isMenuOpen = navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active', isMenuOpen);
+        hamburger.setAttribute('aria-expanded', isMenuOpen ? 'true' : 'false');
+    }
+
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.querySelector('.hamburger');
+
+    if (navMenu) {
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active') && window.innerWidth <= 767.98) {
+                     navMenu.classList.remove('active');
+                     if (hamburger) hamburger.classList.remove('active');
+                     if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    }
+
+    if (navMenu && hamburger) {
+        document.addEventListener('click', function(event) {
+            const header = document.getElementById('mainHeader');
+            if (!header) return;
+
+            const isClickInsideNavMenu = navMenu.contains(event.target);
+            const isClickInsideHeader = header.contains(event.target);
+
+            if (navMenu.classList.contains('active') && !isClickInsideHeader && !isClickInsideNavMenu && window.innerWidth <= 767.98) {
+                 navMenu.classList.remove('active');
+                 hamburger.classList.remove('active');
+                 hamburger.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    window.addEventListener('resize', () => { // Added check for navMenu and hamburger
+        if (navMenu && hamburger && window.innerWidth > 767.98 && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+
+    // --- DOMContentLoaded for initializations ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainHeader = document.getElementById('mainHeader');
+        if (mainHeader) {
+            // Initialize header scroll state on load
+            if (window.scrollY > 50) {
+                mainHeader.classList.add('scrolled');
+            }
+            // Add scroll listener for header
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    mainHeader.classList.add('scrolled');
+                } else {
+                    mainHeader.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // --- Swipe Navigation Logic ---
+        const pageOrder = [
+            'index.html',    // 0
+            'skills.html',   // 1
+            'education.html',// 2
+            'projects.html', // 3
+            'contact.html'   // 4
+        ];
+
+        const currentPagePath = window.location.pathname;
+        let currentPageFilename = currentPagePath.substring(currentPagePath.lastIndexOf('/') + 1);
+
+        // More robust filename detection
+        if (currentPageFilename === "" && currentPagePath.endsWith("/")) { // Handles root path like "yourdomain.com/"
+             currentPageFilename = 'index.html';
+        } else if (currentPageFilename === "") { // Fallback if no filename (e.g. local file open without server)
+             // Try to find based on active nav link or title
+            const activeNavLink = document.querySelector('nav#navMenu a.active');
+            if (activeNavLink) {
+                currentPageFilename = activeNavLink.getAttribute('href');
+            } else {
+                 const title = document.title.toLowerCase();
+                 if (title.includes("home")) currentPageFilename = 'index.html';
+                 else if (title.includes("skills")) currentPageFilename = 'skills.html';
+                 else if (title.includes("education")) currentPageFilename = 'education.html';
+                 else if (title.includes("projects")) currentPageFilename = 'projects.html';
+                 else if (title.includes("contact")) currentPageFilename = 'contact.html';
+                 else currentPageFilename = 'index.html'; // Default
+            }
+        }
+
+
+        const currentPageIndex = pageOrder.indexOf(currentPageFilename);
+
+        const SWIPE_THRESHOLD_X = 50;
+        const SWIPE_TIMEOUT_MS = 700;
+        let touchstartX = 0;
+        let touchendX = 0;
+        let isProcessingSwipe = false;
+        let swipeCooldownTimeout;
+
+        function navigateWithSwipe(direction) {
+            if (isProcessingSwipe) return;
+            isProcessingSwipe = true;
+
+            clearTimeout(swipeCooldownTimeout);
+            swipeCooldownTimeout = setTimeout(() => {
+                isProcessingSwipe = false;
+            }, SWIPE_TIMEOUT_MS);
+
+            if (direction === 'left') { // Swipe content to the left (finger right-to-left) -> Go "Home"
+                if (currentPageFilename !== 'index.html') {
+                    window.location.href = 'index.html';
+                }
+            } else if (direction === 'right') { // Swipe content to the right (finger left-to-right) -> Go "Next"
+                if (currentPageIndex !== -1 && currentPageIndex < pageOrder.length - 1) {
+                    window.location.href = pageOrder[currentPageIndex + 1];
+                }
+            }
+        }
+
+        document.addEventListener('touchstart', e => {
+            if (e.touches.length === 1) {
+                touchstartX = e.changedTouches[0].screenX;
+            }
+            clearTimeout(swipeCooldownTimeout);
+            isProcessingSwipe = false;
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            if (e.changedTouches.length === 1) {
+                touchendX = e.changedTouches[0].screenX;
+                const deltaX = touchendX - touchstartX;
+
+                if (Math.abs(deltaX) > SWIPE_THRESHOLD_X) {
+                    if (deltaX > 0) { // Finger moved right on screen -> Swipe "left" on content -> Go Home
+                        navigateWithSwipe('left');
+                    } else { // Finger moved left on screen -> Swipe "right" on content -> Go Next
+                        navigateWithSwipe('right');
+                    }
+                }
+            }
+        }, { passive: true });
+
+        document.addEventListener('wheel', e => {
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
+                if (Math.abs(e.deltaX) > SWIPE_THRESHOLD_X) {
+                    e.preventDefault();
+                    if (e.deltaX < 0) { // Touchpad swipe left (content moves right)
+                        navigateWithSwipe('left'); // "Home"
+                    } else if (e.deltaX > 0) { // Touchpad swipe right (content moves left)
+                        navigateWithSwipe('right'); // "Next page"
+                    }
+                }
+            }
+        }, { passive: false });
+    });
+  </script>
 </body>
 </html>
