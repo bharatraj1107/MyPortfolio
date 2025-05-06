@@ -4,176 +4,361 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Home - My Portfolio</title>
     <style>
+        /* --- General Styles --- */
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #000000, #1c1c1c);
+            background: linear-gradient(-45deg, #000000, #1c1c1c, #2a2a2a, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
         }
 
-        /* ===== HEADER (Matches Projects Page) ===== */
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        /* --- Header --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #111;
-            padding: 1rem 1rem;
+            background: rgba(17, 17, 17, 0.9); /* Enhanced background for blur */
+            padding: 1rem 2rem;
             position: fixed;
-            width: 99%;
+            width: 100%;
             top: 0;
+            left: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+            backdrop-filter: blur(10px); /* Added for consistency */
+            transition: padding 0.3s ease, background-color 0.3s ease; /* For scroll effect */
+            animation: logoGlow 3s ease-in-out infinite alternate;
         }
+
+        @keyframes logoGlow {
+            0% {
+                box-shadow: 0 0 5px #ff6f61;
+            }
+            100% {
+                box-shadow: 0 0 20px #ff6f61;
+            }
+        }
+
+        header.scrolled { /* Example scroll effect, can be tied to JS */
+            padding: 0.7rem 2rem;
+            background: rgba(0, 0, 0, 0.95);
+        }
+
         .logo {
             font-size: 2.5rem;
             color: #ff6f61;
             font-weight: bold;
             text-decoration: none;
+            white-space: nowrap;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            text-shadow: 0 0 5px #ff6f61;
         }
-        a:hover {
-      text-decoration: underline;
-      color: #ffd166;
-    }   
-        .hamburger {
-      display: none;
-      font-size: 2rem;
-      color: #fff;
-      cursor: pointer;
-    }
-        nav a {
+        .logo:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 20px #ff6f61;
+        }
+
+        /* --- Desktop Navigation --- */
+        nav#navMenu { /* Targeting the nav container specifically */
+             display: flex;
+             align-items: center;
+        }
+
+        nav#navMenu a {
             color: white;
             margin: 0 1.5rem;
             text-decoration: none;
             font-weight: 500;
             font-size: 1.2rem;
-            transition: color 0.3s;
+            transition: all 0.3s ease; /* For all properties */
+            white-space: nowrap;
+            position: relative; /* For ::after pseudo-element */
+            padding: 0.5rem 0.2rem; /* For background glow */
         }
 
-        nav a:hover {
+        nav#navMenu a::after { /* Underline effect from center */
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff6f61;
+            transition: width 0.3s ease;
+        }
+
+        nav#navMenu a:hover::after {
+            width: 100%;
+        }
+
+        nav#navMenu a:hover {
+            color: #ff6f61;
+            transform: translateY(-3px);
+            background-color: rgba(255, 111, 97, 0.05); /* Subtle background glow */
+            border-radius: 4px;
+        }
+
+        nav#navMenu a.active {
+            color: #ff6f61;
+            background-color: rgba(255, 111, 97, 0.08); /* Slightly more glow for active */
+            border-radius: 4px;
+        }
+        nav#navMenu a.active::after {
+            width: 100%; /* Ensure active link has full underline */
+        }
+
+
+        /* --- Hamburger Menu --- */
+        .hamburger {
+            display: none;
+            font-size: 2rem; /* Base size */
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem; /* Clickable area */
+            line-height: 1;
+            z-index: 1001; /* Above mobile nav panel */
+            transition: color 0.3s ease;
+
+            /* For CSS icon morph */
+            position: relative;
+            width: 2rem; /* Fixed width for icon container */
+            height: 2rem; /* Fixed height for icon container */
+        }
+        .hamburger:hover {
             color: #ff6f61;
         }
 
-        /* ===== HOME SECTION ===== */
-        .home {
+        .hamburger i { /* Styles for icons inside hamburger */
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .hamburger .fa-times { /* Initially hide the X icon */
+            opacity: 0;
+            transform: translate(-50%, -50%) rotate(-90deg) scale(0.7);
+        }
+        .hamburger.active .fa-bars { /* When menu is open, hide bars icon */
+            opacity: 0;
+            transform: translate(-50%, -50%) rotate(90deg) scale(0.7);
+        }
+        .hamburger.active .fa-times { /* When menu is open, show X icon */
+            opacity: 1;
+            transform: translate(-50%, -50%) rotate(0deg) scale(1);
+        }
+
+
+        /* --- Home Section --- */
+        .home-section {
+            margin-top: 80px; /* Default, adjust if header height changes significantly */
+            padding: 2rem 1rem;
+            flex-grow: 1;
+            box-sizing: border-box;
             display: flex;
-            justify-content: center;   
-            align-items: top;
-            min-height: 100vh;
-            padding: 8rem 2rem;
-            gap: 4rem;
-        }
-
-        .home-img img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #ff6f61;
-            box-shadow: 0 0 30px rgba(255, 111, 97, 0.3);
-        }
-
-        .home-content {
-            max-width: 600px;
-        }
-
-        .home-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .home-content h1 span {
-            color: #ff6f61;
-        }
-
-        .home-content h3 {
-            font-size: 2rem;
-            color: #ffd166;
-            margin-bottom: 1.5rem;
-        }
-
-        .home-content p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .social-icons {
-            margin-bottom: 2rem;
-        }
-
-        .social-icons a {
-            display: inline-flex;
             justify-content: center;
             align-items: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            margin-right: 1rem;
-            color: white;
-            font-size: 1.2rem;
-            transition: all 0.3s;
         }
 
-        .social-icons a:hover {
-            background: #ff6f61;
-            transform: translateY(-5px);
+        .home-content-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 30px rgba(255, 111, 97, 0.1);
+            max-width: 900px;
+            width: 90%;
+            margin: 1rem auto;
+            animation: fadeInUp 1s ease;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centers items when they wrap on smaller screens too */
+            gap: 3rem;
+            flex-wrap: wrap;
+            text-align: left; /* Default, but overridden by media queries for mobile */
         }
 
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: #ff6f61;
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
+        .home-img { flex-shrink: 0; text-align: center; }
+        .home-img img { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 5px solid #ff6f61; box-shadow: 0 0 30px rgba(255, 111, 97, 0.3); animation: float 3s ease-in-out infinite; }
+        .home-text-content { max-width: 500px; flex-grow: 1; } /* This part is to the right of the image on desktop */
+        .home-text-content h1 { font-size: 3.2rem; margin-bottom: 0.8rem; }
+        .home-text-content h1 span { color: #ff6f61; }
+        .home-text-content h3 { font-size: 1.8rem; color: #ffd166; margin-bottom: 1.2rem; min-height: 2.5em; }
+        #typing { border-right: 2px solid #ffd166; animation: blinkCursor 0.7s step-end infinite; white-space: nowrap; display: inline-block; vertical-align: bottom; }
+        .home-text-content p { font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem; color: #ddd; }
+        .social-icons { margin-bottom: 1.5rem; }
+        .social-icons a { display: inline-flex; justify-content: center; align-items: center; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; margin-right: 1rem; color: white; font-size: 1.2rem; text-decoration: none; transition: all 0.3s ease; }
+        .social-icons a:hover { background: #ff6f61; transform: translateY(-5px); color: white; }
+        .btn { display: inline-block; padding: 0.8rem 2rem; background: #ff6f61; color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+        .btn:hover { background: #ff4d3a; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 111, 97, 0.3); color: white; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+        @keyframes blinkCursor { from, to { border-color: transparent; } 50% { border-color: #ffd166; } }
+
+        /* --- Media Queries --- */
+
+        /* == TABLET Styles == (Screens < 992px wide) */
+        @media (max-width: 991.98px) {
+            header { padding: 1rem 1.5rem; }
+            .logo { font-size: 2.2rem; }
+            nav#navMenu a { margin: 0 1rem; font-size: 1.1rem; } /* Target specific nav */
+
+            .home-section { margin-top: 70px; padding: 1.5rem 1rem; }
+            .home-content-box { padding: 2rem; gap: 2rem; max-width: 800px; }
+            .home-img img { width: 250px; height: 250px; }
+            .home-text-content { max-width: 450px; }
+            .home-text-content h1 { font-size: 2.8rem; }
+            .home-text-content h3 { font-size: 1.6rem; }
+            .home-text-content p { font-size: 1rem; }
         }
 
-        .btn:hover {
-            background: #ff4d3a;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 111, 97, 0.3);
-        }
+        /* == MOBILE Styles == (Screens < 768px wide) */
+        @media (max-width: 767.98px) {
+            header { padding: 0.8rem 1rem; /* Adjusted for mobile */ }
+            .logo { font-size: 1.8rem; } /* Smaller logo for mobile */
 
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .home {
+            .hamburger { display: block; padding: 0; /* Reset padding for precise icon placement */ }
+
+            /* Hide desktop nav links container, mobile nav is #navMenu */
+            /* The nav#navMenu itself becomes the dropdown on mobile */
+            nav#navMenu:not(.active) {
+                /* This rule hides the nav when it's NOT active AND on mobile. */
+                /* When .active is added by JS, this rule no longer applies, and the .active rules take over to show it. */
+                /* For desktop, this :not(.active) rule won't cause hiding because .hamburger is display:none, so navMenu is always "visible" (flex) */
+                 display: none;
+            }
+
+            /* Mobile Navigation Menu Styles - This is where the slide-down menu is defined */
+            nav#navMenu.active, nav#navMenu { /* Base styles for mobile nav container (even when initially hidden) */
+                display: flex; /* Needs to be flex for items to align, will be overridden by display:none above if not .active */
                 flex-direction: column;
-                padding: 6rem 2rem;
+                align-items: center; /* Center items in the dropdown */
+                position: fixed; /* Fixed position for overlay */
+                top: 56px; /* Approx header height (0.8rem*2 for padding + font ~ 56px) */
+                left: 0;
+                width: 100%;
+                background: rgba(17, 17, 17, 0.98); /* Darker, more opaque background */
+                box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+                padding: 1rem 0;
+                z-index: 999; /* Below hamburger icon */
+                backdrop-filter: blur(10px);
+
+                /* Animation properties for initial hidden state */
+                transform: translateY(-150%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease-out, visibility 0s 0.4s;
+            }
+
+            nav#navMenu.active { /* When menu is active (class added by JS) */
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease-in, visibility 0s 0s;
+            }
+
+            /* Links inside the mobile dropdown */
+            nav#navMenu a {
+                display: block;
+                margin: 0.5rem 0;
+                padding: 1rem 0; /* Vertical padding */
+                width: 80%; /* Take up most of the width */
                 text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                font-size: 1.2rem; /* Slightly larger for touch */
+                color: white;
+                background-color: transparent; /* Reset desktop glow */
+                border-radius: 0; /* Reset desktop glow */
+
+                /* For staggered animation */
+                opacity: 0;
+                transform: translateX(-20px);
+                transition: opacity 0.3s ease-out, transform 0.3s ease-out, color 0.3s ease;
             }
-            
-            .home-img img {
-                width: 200px;
-                height: 200px;
+            nav#navMenu a:last-child { border-bottom: none; }
+
+            nav#navMenu a:hover,
+            nav#navMenu a.active { /* Hover/active states for mobile links */
+                background-color: rgba(255, 111, 97, 0.1);
+                color: #ff6f61;
+                transform: translateX(0); /* Keep transform if already animated in */
             }
-            
-            .home-content h1 {
-                font-size: 2.5rem;
+            nav#navMenu a::after { display: none; } /* No underline for mobile dropdown items */
+
+            /* Stagger animation for mobile links when menu is active */
+            nav#navMenu.active a {
+                opacity: 1;
+                transform: translateX(0);
             }
-            
-            .home-content h3 {
-                font-size: 1.5rem;
-            }
-            
-            nav a {
-                font-size: 1rem;
-                margin: 0 1rem;
-            }
+            nav#navMenu.active a:nth-child(1) { transition-delay: 0.1s; }
+            nav#navMenu.active a:nth-child(2) { transition-delay: 0.15s; }
+            nav#navMenu.active a:nth-child(3) { transition-delay: 0.2s; }
+            nav#navMenu.active a:nth-child(4) { transition-delay: 0.25s; }
+            nav#navMenu.active a:nth-child(5) { transition-delay: 0.3s; }
+
+
+            /* --- Mobile Home Content Layout --- */
+            .home-section { margin-top: 56px; padding: 1rem 0.5rem; } /* Adjust top margin based on new header height */
+            .home-content-box { flex-direction: column; padding: 1.5rem; gap: 1.5rem; text-align: center; width: 95%; max-width: 500px; }
+            .home-img { margin-bottom: 0.5rem; }
+            .home-img img { width: 200px; height: 200px; }
+            .home-text-content { max-width: 100%; text-align: center; } /* Text content centered on mobile */
+            .home-text-content h1 { font-size: 2.5rem; }
+            .home-text-content h3 { font-size: 1.5rem; min-height: 2em; }
+            .home-text-content p { font-size: 0.95rem; }
+            .social-icons { margin-bottom: 1.5rem; justify-content: center; }
+            .btn { padding: 0.7rem 1.8rem; font-size: 0.95rem; }
         }
-        
+
+        /* == EXTRA SMALL MOBILE Styles == (Screens < 576px wide) */
+        @media (max-width: 575.98px) {
+            .logo { font-size: 1.6rem; } /* Further reduce logo size */
+            header { padding: 0.6rem 0.8rem; } /* Adjust header padding */
+            nav#navMenu.active, nav#navMenu { /* Adjust top for smaller header */
+                 top: 48px; /* Approx header height: 0.6rem*2 + 1.6rem font ~ 48px */
+            }
+            .home-section { margin-top: 48px; } /* Match nav top */
+
+            .home-content-box { padding: 1.2rem; gap: 1rem;}
+            .home-img img { width: 160px; height: 160px; }
+            .home-text-content h1 { font-size: 2.2rem; }
+            .home-text-content h3 { font-size: 1.3rem; }
+            .home-text-content p { font-size: 0.9rem; }
+            .social-icons a { width: 35px; height: 35px; font-size: 1.1rem; margin-right: 0.8rem; }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <a href="index.html" class="logo">My Portfolio  </a>
-        <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-        <nav>
-            
+    <header id="mainHeader">
+        <a href="index.html" class="logo">My Portfolio</a>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times"></i>
+        </button>
+        <nav id="navMenu" aria-label="Main navigation"> <!-- This is the navigation part, on the right on desktop -->
             <a href="index.html" class="active">Home</a>
             <a href="skills.html">Skills</a>
             <a href="education.html">Education</a>
@@ -182,21 +367,131 @@
         </nav>
     </header>
 
-    <section class="home">
-        <div class="home-img"><img src="main.jpg" alt="Profile Image"></div>
-        <div class="home-content">
-            <h1>Hi, It's <span>Bharatraj</span></h1>
-            <h3 class="typing-text">I'm a <span id="typing"></span></h3>
-            <p>An enthusiastic learner in Data Science and Artificial Intelligence with a strong interest in using machine learning and analytics to solve real-world problems. Quick to adapt to new technologies and eager to contribute to innovative software solutions.</p>
-            <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <section class="home-section">
+        <div class="home-content-box">
+            <div class="home-img">
+                <img src="main.jpg" alt="My Portfolio profile picture"> <!-- Ensure main.jpg is in the same folder or provide correct path -->
             </div>
-            <a href="contact.html" class="btn">Hire me</a>
+            <div class="home-text-content"> <!-- This is the text content, to the right of image on desktop -->
+                <h1>Hi, It's <span>BHARATRAJ</span></h1>
+                <h3 class="typing-text-container">I'm a <span id="typing"></span></h3>
+                <p>An enthusiastic learner in Data Science and Artificial Intelligence with a strong interest in using machine learning and analytics to solve real-world problems. Quick to adapt to new technologies and eager to contribute to innovative software solutions.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="LinkedIn Profile" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub Profile" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" aria-label="Instagram Profile" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <a href="contact.html" class="btn">Hire me</a>
+            </div>
         </div>
     </section>
 
-    <script src="script.js"></script>
+    <script>
+        // --- Mobile Menu Toggle ---
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const isMenuOpen = navMenu.classList.toggle('active');
+
+            hamburger.classList.toggle('active', isMenuOpen);
+            hamburger.setAttribute('aria-expanded', isMenuOpen ? 'true' : 'false');
+        }
+
+        // --- Close Mobile Menu Logic ---
+        const navMenu = document.getElementById('navMenu'); // Re-declared for this scope, fine.
+        const hamburger = document.querySelector('.hamburger'); // Re-declared, fine.
+
+        // Close menu if a link is clicked
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active') && window.innerWidth <= 767.98) { // Check if mobile view
+                     navMenu.classList.remove('active');
+                     hamburger.classList.remove('active');
+                     hamburger.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+        // Close menu if clicked outside the header/nav area on mobile
+        document.addEventListener('click', function(event) {
+            const header = document.getElementById('mainHeader');
+            const isClickInsideHeader = header.contains(event.target);
+            const isClickInsideNavMenu = navMenu.contains(event.target); // Check if click is inside the navMenu too
+
+            if (navMenu.classList.contains('active') && !isClickInsideHeader && !isClickInsideNavMenu && window.innerWidth <= 767.98) {
+                 navMenu.classList.remove('active');
+                 hamburger.classList.remove('active');
+                 hamburger.setAttribute('aria-expanded', 'false');
+            }
+        });
+        // Close menu if window is resized to be larger than mobile breakpoint
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 767.98 && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // --- Header Scroll Effect ---
+        const mainHeader = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
+        });
+
+
+        // --- Typing Animation ---
+        const typingElement = document.getElementById('typing');
+        const professions = ['Developer', 'Designer', 'Data Scientist', 'AI Enthusiast'];
+        let professionIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeSpeed = 150;
+        const deleteSpeed = 100;
+        const delayBetweenWords = 1500;
+
+        function type() {
+            const currentProfession = professions[professionIndex];
+            let currentWord = '';
+            if (isDeleting) {
+                currentWord = currentProfession.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                currentWord = currentProfession.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            // Ensure typingElement exists before trying to set its textContent
+            if (typingElement) {
+                typingElement.textContent = currentWord;
+            } else {
+                console.error("Typing element not found!"); // Good to have a fallback or error log
+                return; // Stop the animation if element is missing
+            }
+
+            let time = isDeleting ? deleteSpeed : typeSpeed;
+            if (!isDeleting && charIndex === currentProfession.length) {
+                time = delayBetweenWords;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                professionIndex = (professionIndex + 1) % professions.length;
+                time = typeSpeed * 2;
+            }
+            setTimeout(type, time);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typingElement) {
+                setTimeout(type, 1000);
+            }
+            // Initialize header scroll state on load
+            if (mainHeader && window.scrollY > 50) { // Check mainHeader exists
+                mainHeader.classList.add('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
