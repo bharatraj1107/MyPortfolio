@@ -1,300 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <title>Skills</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Skills - My Portfolio</title>
   <style>
-    /* Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* --- General Styles --- */
+    html {
+        scroll-behavior: smooth;
     }
-    
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #000000, #1c1c1c);
-      color: #ffffff;
-      line-height: 1.6;
-      overflow-x: hidden;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to right, #000000, #1c1c1c);
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        /* Optional: Prevent default browser swipe navigation if it interferes. */
+        /* overscroll-behavior-x: none; */
     }
-    
-    /* Header Styles */
+
+    /* --- Header (Enhanced) --- */
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #111;
-      padding: 1rem 2rem;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(17, 17, 17, 0.9);
+        padding: 1rem 2rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        box-sizing: border-box;
+        backdrop-filter: blur(10px);
+        transition: padding 0.3s ease, background-color 0.3s ease;
     }
-    
+    header.scrolled {
+        padding: 0.7rem 2rem;
+        background: rgba(0, 0, 0, 0.95);
+    }
     .logo {
-      font-size: 1.8rem;
-      color: #ff6f61;
-      font-weight: bold;
-      text-decoration: none;
+        font-size: 2.5rem;
+        color: #ff6f61;
+        font-weight: bold;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: transform 0.3s ease, text-shadow 0.3s ease;
     }
-    
-    /* Navigation - Desktop */
-    .desktop-nav {
-      display: flex;
+    .logo:hover {
+        transform: scale(1.05);
+        text-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
     }
-    
-    .desktop-nav a {
-      color: rgb(255, 233, 233);
-      margin: 0 1.5rem;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1.1rem;
-      transition: color 0.3s;
+
+    /* --- Desktop Navigation (Enhanced) --- */
+    nav#navMenu {
+        display: flex;
+        align-items: center;
     }
-    
-    .desktop-nav a:hover {
-      color: #ff6f61;
+    nav#navMenu a {
+        color: white;
+        margin: 0 1.5rem;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        position: relative;
+        padding: 0.5rem 0.2rem;
     }
-    
-    /* Mobile Menu Button */
-    .mobile-menu-btn {
-      display: none;
-      font-size: 1.8rem;
-      color: #fff;
-      background: none;
-      border: none;
-      cursor: pointer;
+    nav#navMenu a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #ff6f61;
+        transition: width 0.3s ease;
     }
-    
-    /* Mobile Navigation */
-    .mobile-nav {
-      position: fixed;
-      top: 70px;
-      left: 0;
-      width: 100%;
-      background: #111;
-      padding: 1rem;
-      transform: translateY(-150%);
-      transition: transform 0.3s ease;
-      z-index: 999;
+    nav#navMenu a:hover::after {
+        width: 100%;
     }
-    
-    .mobile-nav.active {
-      transform: translateY(0);
+    nav#navMenu a:hover {
+        color: #ff6f61;
+        transform: translateY(-3px);
+        background-color: rgba(255, 111, 97, 0.05);
+        border-radius: 4px;
     }
-    
-    .mobile-nav a {
-      display: block;
-      color: rgb(255, 233, 233);
-      padding: 0.8rem 0;
-      text-decoration: none;
-      font-size: 1.1rem;
-      border-bottom: 1px solid #333;
+    nav#navMenu a.active {
+        color: #ff6f61;
+        background-color: rgba(255, 111, 97, 0.08);
+        border-radius: 4px;
     }
-    
-    /* Main Content */
-    main {
-      padding-top: 80px;
-      min-height: 100vh;
+    nav#navMenu a.active::after {
+        width: 100%;
     }
-    
-    .home {
-      padding: 2rem;
-      text-align: center;
-    }
-    
-    .home-content {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 30px rgba(255, 111, 97, 0.1);
-      max-width: 800px;
-      margin: 0 auto;
-      animation: fadeInUp 1s ease;
-    }
-    
-    .home-content h1 {
-      font-size: 2.5rem;
-      color: #ff6f61;
-      margin-bottom: 1.5rem;
-    }
-    
-    .home-content h2 {
-      font-size: 1.8rem;
-      color: #ffd166;
-      margin: 2rem 0 1rem;
-    }
-    
-    .home-content ul {
-      list-style: none;
-      font-size: 1.1rem;
-      padding: 0;
-    }
-    
-    .home-content li {
-      margin: 1rem 0;
-      background: rgba(255, 255, 255, 0.08);
-      padding: 1rem;
-      border-radius: 0.5rem;
-    }
-    
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    /* Responsive Breakpoints */
-    @media (max-width: 992px) {
-      .home-content h1 {
-        font-size: 2.2rem;
-      }
-      
-      .home-content h2 {
-        font-size: 1.6rem;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      header {
-        padding: 1rem;
-      }
-      
-      .logo {
-        font-size: 1.5rem;
-      }
-      
-      .desktop-nav {
+
+    /* --- Hamburger Menu (Enhanced) --- */
+    .hamburger {
         display: none;
-      }
-      
-      .mobile-menu-btn {
-        display: block;
-      }
-      
-      .home-content {
-        padding: 1.5rem;
-      }
-      
-      .home-content h1 {
         font-size: 2rem;
-      }
-      
-      .home-content h2 {
-        font-size: 1.4rem;
-      }
-      
-      .home-content li {
-        padding: 0.8rem;
-        font-size: 1rem;
-      }
+        color: #fff;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        line-height: 1;
+        z-index: 1001;
+        transition: color 0.3s ease;
+        position: relative;
+        width: 2rem;
+        height: 2rem;
     }
-    
-    @media (max-width: 480px) {
-      .home {
-        padding: 1rem;
-      }
-      
-      .home-content {
-        padding: 1rem;
-      }
-      
-      .home-content h1 {
+    .hamburger:hover {
+        color: #ff6f61;
+    }
+    .hamburger i {
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .hamburger .fa-times {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-90deg) scale(0.7);
+    }
+    .hamburger.active .fa-bars {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(90deg) scale(0.7);
+    }
+    .hamburger.active .fa-times {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+
+    /* --- Skills Section (Modified for columns) --- */
+    .skills-section {
+        margin-top: 80px;
+        padding: 2rem 1rem;
+        flex-grow: 1;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .skills-content-box {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 2.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 0 30px rgba(255, 111, 97, 0.1);
+        max-width: 1000px;
+        width: 90%;
+        margin: 1rem auto;
+        animation: fadeInUp 1s ease;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .skills-content-box h1 {
+        font-size: 3rem;
+        color: #ff6f61;
+        margin-bottom: 2.5rem;
+    }
+
+    .skills-layout-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 2rem;
+        text-align: left;
+    }
+
+    .skill-category-item {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 1.5rem;
+        border-radius: 0.8rem;
+        flex: 1 1 280px;
+        min-width: 250px;
+        box-sizing: border-box;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .skill-category-item h2 {
         font-size: 1.8rem;
-      }
-      
-      .home-content h2 {
-        font-size: 1.3rem;
-      }
+        color: #ffd166;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(255, 210, 102, 0.5);
+        padding-bottom: 0.5rem;
+        text-align: left;
+    }
+
+    .skill-category-item ul {
+        list-style: none;
+        font-size: 1.1rem;
+        padding: 0;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    .skill-category-item li {
+        margin: 0.8rem 0;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        transition: transform 0.3s, background-color 0.3s;
+        line-height: 1.6;
+    }
+
+    .skill-category-item li:hover {
+        transform: translateX(8px);
+        background-color: rgba(255, 111, 97, 0.1);
+        color: #fff;
+    }
+
+    .skill-category-item li b {
+        color: #ffaeac;
+        margin-right: 0.5em;
+        font-weight: 600;
+    }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* --- Media Queries (Adjusting for new layout and original styles) --- */
+    @media (max-width: 991.98px) { /* Tablet */
+        header { padding: 1rem 1.5rem; }
+        .logo { font-size: 2.2rem; }
+        nav#navMenu a { margin: 0 1rem; font-size: 1.1rem; }
+
+        .skills-section { margin-top: 70px; padding: 1.5rem 1rem; }
+        .skills-content-box { padding: 2rem; max-width: 90%; }
+        .skills-content-box h1 { font-size: 2.6rem; }
+        
+        .skills-layout-container { gap: 1.5rem; }
+        .skill-category-item { flex-basis: calc(50% - 1rem); min-width: 200px; }
+        .skill-category-item h2 { font-size: 1.6rem; }
+        .skill-category-item ul { font-size: 1rem; }
+        .skill-category-item li { padding: 0.8rem 1.2rem; }
+    }
+
+    @media (max-width: 767.98px) { /* Mobile */
+        header { padding: 0.8rem 1rem; }
+        .logo { font-size: 1.8rem; }
+
+        .hamburger { display: block; padding: 0; }
+        nav#navMenu:not(.active) { display: none; }
+        
+        nav#navMenu.active, nav#navMenu {
+            display: flex; flex-direction: column; align-items: center;
+            position: fixed; top: 56px; left: 0; width: 100%;
+            background: rgba(17, 17, 17, 0.98); box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            padding: 1rem 0; z-index: 999; backdrop-filter: blur(10px);
+            transform: translateY(-150%); opacity: 0; visibility: hidden;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease-out, visibility 0s 0.4s;
+        }
+        nav#navMenu.active {
+            transform: translateY(0); opacity: 1; visibility: visible;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease-in, visibility 0s 0s;
+        }
+        nav#navMenu a {
+            display: block; margin: 0.5rem 0; padding: 1rem 0; width: 80%;
+            text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.2rem; color: white; background-color: transparent; border-radius: 0;
+            opacity: 0; transform: translateX(-20px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out, color 0.3s ease;
+        }
+        nav#navMenu a:last-child { border-bottom: none; }
+        nav#navMenu a:hover, nav#navMenu a.active {
+            background-color: rgba(255, 111, 97, 0.1); color: #ff6f61; transform: translateX(0);
+        }
+        nav#navMenu a::after { display: none; }
+        nav#navMenu.active a { opacity: 1; transform: translateX(0); }
+        nav#navMenu.active a:nth-child(1) { transition-delay: 0.1s; }
+        /* ... other nth-child delays ... */
+        nav#navMenu.active a:nth-child(5) { transition-delay: 0.3s; }
+
+
+        .skills-section { margin-top: 56px; padding: 1rem 0.5rem; }
+        .skills-content-box { padding: 1.5rem; width: 95%; }
+        .skills-content-box h1 { font-size: 2rem; }
+
+        .skills-layout-container { flex-direction: column; gap: 1rem; }
+        .skill-category-item { flex-basis: 100%; padding: 1rem; }
+        .skill-category-item h2 { font-size: 1.4rem; }
+        .skill-category-item ul { font-size: 0.95rem; }
+        .skill-category-item li { padding: 0.7rem 1rem; }
+        .skill-category-item li:hover { transform: none; }
+    }
+
+    @media (max-width: 575.98px) {
+        .logo { font-size: 1.6rem; }
+        header { padding: 0.6rem 0.8rem; }
+        nav#navMenu.active, nav#navMenu { top: 48px; }
+        .skills-section { margin-top: 48px; }
+
+        .skills-content-box { padding: 1.2rem; }
+        .skills-content-box h1 { font-size: 1.8rem; }
+        .skill-category-item h2 { font-size: 1.3rem; }
+        .skill-category-item ul { font-size: 0.9rem; }
+        .skill-category-item li { padding: 0.6rem 0.8rem; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <a href="index.html" class="logo">Bharatraj</a>
-    
-    <!-- Desktop Navigation -->
-    <nav class="desktop-nav">
+  <header id="mainHeader">
+    <a href="index.html" class="logo">My Portfolio</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-times"></i>
+    </button>
+    <nav id="navMenu">
       <a href="index.html">Home</a>
-      <a href="skills.html">Skills</a>
+      <a href="skills.html" class="active">Skills</a>
       <a href="education.html">Education</a>
       <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
     </nav>
-    
-    <!-- Mobile Menu Button -->
-    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
   </header>
-  
-  <!-- Mobile Navigation -->
-  <nav class="mobile-nav" id="mobileNav">
-    <a href="index.html">Home</a>
-    <a href="skills.html">Skills</a>
-    <a href="education.html">Education</a>
-    <a href="projects.html">Projects</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  
-  <main>
-    <section class="home">
-      <div class="home-content">
-        <h1>Technical Skills</h1>
-        <ul>
-          <li><b>Backend:</b> Python, C, C++, Java</li>
-          <li><b>Frontend:</b> HTML, CSS, JavaScript</li>
-          <li><b>Database:</b> MySQL, MongoDB</li>
-          <li><b>Tools:</b> MS Excel, MS Word</li>
-        </ul>
 
-        <h2>Non-Technical Skills</h2>
-        <ul>
-          <li>Team Work</li>
-          <li>Creativity</li>
-          <li>Time Management</li>
-          <li>Communication</li>
-          <li>Adaptability</li>
-          <li>Problem-Solving</li>
-          <li>Leadership Potential</li>
-          <li>Critical Thinking</li>
-          <li>Attention to Detail</li>
-        </ul>
-        
-        <h2>Languages Known</h2>
-        <ul>
-          <li>Tamil</li>
-          <li>English</li>
-          <li>Hindi</li>  
-        </ul>
-      </div>
-    </section>
-  </main>
+  <section class="skills-section">
+    <div class="skills-content-box">
+        <h1>My Skills</h1>
+        <div class="skills-layout-container">
+            <!-- Skill category items -->
+            <div class="skill-category-item">
+                <h2>Technical Skills</h2>
+                <ul>
+                  <li><b>Backend:</b> Python, C, C++, Java</li>
+                  <li><b>Frontend:</b> HTML, CSS, JavaScript</li>
+                  <li><b>Database:</b> MySQL, MongoDB</li>
+                  <li><b>Tools:</b> MS Excel, MS Word</li>
+                </ul>
+            </div>
+            <div class="skill-category-item">
+                <h2>Non-Technical Skills</h2>
+                <ul>
+                  <li>Team Work</li><li>Creativity</li><li>Time Management</li><li>Communication</li>
+                  <li>Adaptability</li><li>Problem-Solving</li><li>Leadership Potential</li>
+                  <li>Critical Thinking</li><li>Attention to Detail</li>
+                </ul>
+            </div>
+            <div class="skill-category-item">
+                <h2>Languages Known</h2>
+                <ul>
+                  <li>Tamil</li><li>English</li><li>Hindi</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </section>
 
   <script>
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileNav = document.getElementById('mobileNav');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-      mobileNav.classList.toggle('active');
+    // --- Mobile Menu Toggle & Close Logic ---
+    function toggleMenu() {
+        const navMenu = document.getElementById('navMenu');
+        const hamburger = document.querySelector('.hamburger');
+        const isMenuOpen = navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active', isMenuOpen);
+        hamburger.setAttribute('aria-expanded', isMenuOpen ? 'true' : 'false');
+    }
+
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.querySelector('.hamburger');
+
+    document.querySelectorAll('#navMenu a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu.classList.contains('active') && window.innerWidth <= 767.98) {
+                 navMenu.classList.remove('active');
+                 hamburger.classList.remove('active');
+                 hamburger.setAttribute('aria-expanded', 'false');
+            }
+        });
     });
-    
-    // Close mobile menu when clicking on a link
-    const mobileLinks = document.querySelectorAll('.mobile-nav a');
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        mobileNav.classList.remove('active');
-      });
+
+    document.addEventListener('click', function(event) {
+        const header = document.getElementById('mainHeader');
+        const isClickInsideHeader = header.contains(event.target);
+        const isClickInsideNavMenu = navMenu.contains(event.target);
+        if (navMenu.classList.contains('active') && !isClickInsideHeader && !isClickInsideNavMenu && window.innerWidth <= 767.98) {
+             navMenu.classList.remove('active');
+             hamburger.classList.remove('active');
+             hamburger.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 767.98 && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // --- Header Scroll Effect ---
+    const mainHeader = document.getElementById('mainHeader');
+    if (mainHeader) { // Ensure header exists
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
+        });
+    }
+
+    // --- DOMContentLoaded for initializations ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize header scroll state on load
+        if (mainHeader && window.scrollY > 50) {
+            mainHeader.classList.add('scrolled');
+        }
+
+        // --- Swipe Navigation Logic ---
+        const pageOrder = [
+            'index.html',    // 0
+            'skills.html',   // 1
+            'education.html',// 2
+            'projects.html', // 3
+            'contact.html'   // 4
+        ];
+
+        const currentPagePath = window.location.pathname;
+        let currentPageFilename = currentPagePath.substring(currentPagePath.lastIndexOf('/') + 1);
+        if (currentPageFilename === "" && currentPagePath.endsWith("/")) { // Handles root path like "yourdomain.com/"
+             currentPageFilename = 'index.html';
+        } else if (currentPageFilename === "") { // Fallback if no filename and not root (e.g. local file open)
+             // This case might need specific handling if you open files directly without a server
+             // For now, try to find based on title or assume index if uncertain
+             const title = document.title.toLowerCase();
+             if (title.includes("home")) currentPageFilename = 'index.html';
+             else if (title.includes("skills")) currentPageFilename = 'skills.html';
+             // Add more else if for other pages if needed
+             else currentPageFilename = 'index.html'; // Default
+        }
+
+
+        const currentPageIndex = pageOrder.indexOf(currentPageFilename);
+
+        const SWIPE_THRESHOLD_X = 50; // Min horizontal distance for a swipe
+        const SWIPE_TIMEOUT_MS = 700; // Cooldown period after a swipe
+        let touchstartX = 0;
+        let touchendX = 0;
+        let isProcessingSwipe = false;
+        let swipeCooldownTimeout;
+
+        function navigateWithSwipe(direction) {
+            if (isProcessingSwipe) return;
+            isProcessingSwipe = true;
+
+            // Clear any existing cooldown and set a new one
+            clearTimeout(swipeCooldownTimeout);
+            swipeCooldownTimeout = setTimeout(() => {
+                isProcessingSwipe = false;
+            }, SWIPE_TIMEOUT_MS);
+
+            if (direction === 'left') { // User swipes finger from right to left on screen
+                // Go to "Home" page as requested
+                if (currentPageFilename !== 'index.html') {
+                    window.location.href = 'index.html';
+                }
+            } else if (direction === 'right') { // User swipes finger from left to right on screen
+                // Go to "Next" page
+                if (currentPageIndex !== -1 && currentPageIndex < pageOrder.length - 1) {
+                    window.location.href = pageOrder[currentPageIndex + 1];
+                }
+            }
+        }
+
+        // Touch events for touchscreens
+        document.addEventListener('touchstart', e => {
+            if (e.touches.length === 1) { // Consider single touch swipes
+                touchstartX = e.changedTouches[0].screenX;
+            }
+            // If a new touch starts during cooldown, reset the processing flag
+            // to allow this new touch to potentially become a swipe.
+            clearTimeout(swipeCooldownTimeout);
+            isProcessingSwipe = false;
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            if (e.changedTouches.length === 1) {
+                touchendX = e.changedTouches[0].screenX;
+                const deltaX = touchendX - touchstartX;
+
+                if (Math.abs(deltaX) > SWIPE_THRESHOLD_X) {
+                    if (deltaX > 0) { // Finger moved right (swipe left content)
+                        navigateWithSwipe('left'); // "Home"
+                    } else { // Finger moved left (swipe right content)
+                        navigateWithSwipe('right'); // "Next Page"
+                    }
+                }
+            }
+        }, { passive: true });
+
+        // Wheel events for touchpads (horizontal scroll)
+        document.addEventListener('wheel', e => {
+            // Check if horizontal scroll is dominant and significant
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
+                // Only prevent default if we are actually going to navigate
+                // This allows normal horizontal scrolling on elements if swipe threshold isn't met.
+                
+                if (Math.abs(e.deltaX) > SWIPE_THRESHOLD_X) {
+                    e.preventDefault(); // Prevent browser back/forward
+                    if (e.deltaX < 0) { // Content moves right (swipe left)
+                        navigateWithSwipe('left'); // "Home"
+                    } else if (e.deltaX > 0) { // Content moves left (swipe right)
+                        navigateWithSwipe('right'); // "Next page"
+                    }
+                }
+            }
+        }, { passive: false }); // passive:false because we call preventDefault
     });
   </script>
 </body>
