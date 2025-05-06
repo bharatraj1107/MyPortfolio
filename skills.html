@@ -1,111 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <title>Skills</title>
   <style>
-       body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #000000, #1c1c1c);
-            color: #ffffff;
-            overflow-y: scroll;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #111;
-            padding: 1rem 1rem;
-            position: fixed;
-            width: 99%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-    a:hover {
-      text-decoration: underline;
-      color: #ffd166;
-    } 
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #000000, #1c1c1c);
+      color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* Header Styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
     .logo {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       color: #ff6f61;
       font-weight: bold;
       text-decoration: none;
     }
-    nav a {
-      color: white;
+    
+    /* Navigation - Desktop */
+    .desktop-nav {
+      display: flex;
+    }
+    
+    .desktop-nav a {
+      color: rgb(255, 233, 233);
       margin: 0 1.5rem;
       text-decoration: none;
       font-weight: 500;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       transition: color 0.3s;
     }
-
-    nav a:hover{
+    
+    .desktop-nav a:hover {
       color: #ff6f61;
     }
-  
-
-    .hamburger {
+    
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
       display: none;
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: #fff;
+      background: none;
+      border: none;
       cursor: pointer;
     }
-
-    /* ===== MAIN CONTENT ===== */
-    .home {
-      padding: 8rem 2rem 4rem;
-      text-align: center;
-      
+    
+    /* Mobile Navigation */
+    .mobile-nav {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background: #111;
+      padding: 1rem;
+      transform: translateY(-150%);
+      transition: transform 0.3s ease;
+      z-index: 999;
     }
-
+    
+    .mobile-nav.active {
+      transform: translateY(0);
+    }
+    
+    .mobile-nav a {
+      display: block;
+      color: rgb(255, 233, 233);
+      padding: 0.8rem 0;
+      text-decoration: none;
+      font-size: 1.1rem;
+      border-bottom: 1px solid #333;
+    }
+    
+    /* Main Content */
+    main {
+      padding-top: 80px;
+      min-height: 100vh;
+    }
+    
+    .home {
+      padding: 2rem;
+      text-align: center;
+    }
+    
     .home-content {
       background: rgba(255, 255, 255, 0.05);
-      padding: 3rem;
+      padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 0 30px rgba(255, 111, 97, 0.1);
       max-width: 800px;
-      margin: auto;
+      margin: 0 auto;
       animation: fadeInUp 1s ease;
     }
-
+    
     .home-content h1 {
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       color: #ff6f61;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
-
+    
     .home-content h2 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: #ffd166;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
+      margin: 2rem 0 1rem;
     }
-
+    
     .home-content ul {
       list-style: none;
-      font-size: 1.4rem;
+      font-size: 1.1rem;
       padding: 0;
     }
-
+    
     .home-content li {
       margin: 1rem 0;
       background: rgba(255, 255, 255, 0.08);
       padding: 1rem;
       border-radius: 0.5rem;
     }
-
-    .home-content p {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      color: #ddd;
-    }
-
+    
+    /* Animations */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -116,89 +154,148 @@
         transform: translateY(0);
       }
     }
-
-    @media(max-width: 768px) {
-      .home-content {
-        padding: 2rem;
-      }
-
+    
+    /* Responsive Breakpoints */
+    @media (max-width: 992px) {
       .home-content h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
       }
-
-      nav a {
-        font-size: 1rem;
-        margin: 0 1rem;
+      
+      .home-content h2 {
+        font-size: 1.6rem;
       }
-
-      .hamburger {
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+      }
+      
+      .desktop-nav {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
         display: block;
       }
-
-      nav {
-        display: none;
-        flex-direction: column;
-        background: #111;
-        position: absolute;
-        top: 70px;
-        right: 0;
-        width: 100%;
-        text-align: center;
+      
+      .home-content {
+        padding: 1.5rem;
       }
-
-      nav.show {
-        display: flex;
+      
+      .home-content h1 {
+        font-size: 2rem;
       }
-
-      nav a {
-        margin: 1rem 0;
+      
+      .home-content h2 {
+        font-size: 1.4rem;
+      }
+      
+      .home-content li {
+        padding: 0.8rem;
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .home {
+        padding: 1rem;
+      }
+      
+      .home-content {
+        padding: 1rem;
+      }
+      
+      .home-content h1 {
+        font-size: 1.8rem;
+      }
+      
+      .home-content h2 {
+        font-size: 1.3rem;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <a href="index.html" class="logo">My Portfolio</a>
-    <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-    <nav id="navMenu">
+    <a href="index.html" class="logo">Bharatraj</a>
+    
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
       <a href="index.html">Home</a>
       <a href="skills.html">Skills</a>
       <a href="education.html">Education</a>
       <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
     </nav>
-  </header>
-
-  <section class="home">
-    <div class="home-content">
-      <h1>Technical Skills</h1>
-      <ul>
-        <li><b>Backend:</b> Python, C, C++, Java</li>
-        <li><b>Frontend:</b> HTML, CSS, JavaScript</li>
-        <li><b>Database:</b> MySQL, MongoDB</li>
-        <li><b>Tools:</b> MS Excel, MS Word</li>
-      </ul>
-
-      <h2>Non-Technical Skills</h2>
-      <ul>
-        <li>Team Work</li>
-        <li>Creativity</li>
-        <li>Time Management</li>
-        <li>Communication</li>
-        <li>Adaptability</li>
-        <li>Problem-Solving</li>
-        <li>Leadership Potential</li>
-        <li>Critical Thinking</li>
-        <li>Attention to Detail</li>
     
-      <h2>Languages Known</h2>
-      <li>Tamil</li>
-      <li>English</li>
-      <li>Hindi</li>  
-      </ul>
-    </div>
-  </section>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+  </header>
+  
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="skills.html">Skills</a>
+    <a href="education.html">Education</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  
+  <main>
+    <section class="home">
+      <div class="home-content">
+        <h1>Technical Skills</h1>
+        <ul>
+          <li><b>Backend:</b> Python, C, C++, Java</li>
+          <li><b>Frontend:</b> HTML, CSS, JavaScript</li>
+          <li><b>Database:</b> MySQL, MongoDB</li>
+          <li><b>Tools:</b> MS Excel, MS Word</li>
+        </ul>
 
-  <script src="script.js"></script>
+        <h2>Non-Technical Skills</h2>
+        <ul>
+          <li>Team Work</li>
+          <li>Creativity</li>
+          <li>Time Management</li>
+          <li>Communication</li>
+          <li>Adaptability</li>
+          <li>Problem-Solving</li>
+          <li>Leadership Potential</li>
+          <li>Critical Thinking</li>
+          <li>Attention to Detail</li>
+        </ul>
+        
+        <h2>Languages Known</h2>
+        <ul>
+          <li>Tamil</li>
+          <li>English</li>
+          <li>Hindi</li>  
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+      mobileNav.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking on a link
+    const mobileLinks = document.querySelectorAll('.mobile-nav a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileNav.classList.remove('active');
+      });
+    });
+  </script>
 </body>
 </html>
