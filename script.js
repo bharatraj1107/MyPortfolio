@@ -1,11 +1,5 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const nav = document.querySelector('nav');
-    hamburger.addEventListener('click', () => {
-        nav.classList.toggle('active');
-    });
-
     const typingElement = document.getElementById('typing');
     if (typingElement) {
         const words = ["Data Analytics","Web Developer", "Web Designer", "Script Writer"];
